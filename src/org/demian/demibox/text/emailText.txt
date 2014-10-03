@@ -1,0 +1,7 @@
+Welcome to DemiBox!
+
+Congratulations! You are one step closer to get into DemiBox with username: %s
+
+Your temporary password is: %s
+
+Use this password to login.

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<context:component-scan base-package="org.demian.demibox.dao" />
+	<context:component-scan base-package="org.demian.demibox.service" />
+	<context:annotation-config />
+	<jee:jndi-lookup jndi-name="jdbc/DemiBox" id="dataSource" expected-type="javax.sql.DataSource" />
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="contents" class="org.apache.commons.io.IOUtils" factory-method="toString">
+		<constructor-arg value="classpath:org/demian/demibox/text/emailText.txt" type="java.io.InputStream" />
+	</bean>
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="org.demian.demibox.text.messages" />
+	</bean>
+</beans>
